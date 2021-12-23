@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
   return (
-    <Link to={linkUrl} className={`menu-item ${size}`}>
+    <Link to={linkUrl} className={`menu-item ${size ? size : ""}`}>
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
