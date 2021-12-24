@@ -11,6 +11,7 @@ class SignUp extends Component {
     email: "",
     password: "",
     confirmPassword: "",
+    error: "",
   };
 
   handleSubmit = async (e) => {
@@ -33,9 +34,18 @@ class SignUp extends Component {
         email: "",
         password: "",
         confirmPassword: "",
+        error: "",
       });
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/weak-password") {
+        this.setState({ error: "Password should be at least 6 characters" });
+      } else if (error.code === "auth/email-already-in-use") {
+        this.setState({
+          error: "Email already saved in database, please sign in!",
+        });
+      } else {
+        this.setState({ error: error.message });
+      }
     }
   };
 
@@ -85,6 +95,8 @@ class SignUp extends Component {
           />
           <CustomButton type="submit">SIGN UP</CustomButton>
         </form>
+
+        <div id="error">{this.state.error}</div>
       </div>
     );
   }

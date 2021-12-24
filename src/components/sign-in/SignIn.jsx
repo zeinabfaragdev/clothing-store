@@ -9,6 +9,7 @@ class SignIn extends Component {
   state = {
     email: "",
     password: "",
+    error: "",
   };
 
   handleSubmit = async (e) => {
@@ -16,9 +17,16 @@ class SignIn extends Component {
     const { email, password } = this.state;
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
+      this.setState({ email: "", password: "", error: "" });
     } catch (error) {
-      console.log(error);
+      console.log(error.code);
+      if (error.code === "auth/user-not-found") {
+        this.setState({ error: "User doesn't exist, please sign up!" });
+      } else if (error.code === "auth/wrong-password")
+        this.setState({ error: "Wrong Password" });
+      else {
+        this.setState({ error: error.message });
+      }
     }
   };
 
@@ -53,13 +61,14 @@ class SignIn extends Component {
           <div className="buttons">
             <CustomButton type="submit"> Sign in</CustomButton>
             <CustomButton
+              type="button"
               isGoogleSignIn
               onClick={signInWithGoogle}
-              type="submit"
             >
               Sign in with Google
             </CustomButton>
           </div>
+          <div id="error">{this.state.error}</div>
         </form>
       </div>
     );
