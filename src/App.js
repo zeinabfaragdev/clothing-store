@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user-actions";
 import HomePage from "./pages/home/HomePage";
@@ -35,18 +35,28 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/signin" element={<SignInPage />} />
+          <Route
+            path="/signin"
+            element={
+              this.props.currentUser ? <Navigate to="/" /> : <SignInPage />
+            }
+          />
         </Routes>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
