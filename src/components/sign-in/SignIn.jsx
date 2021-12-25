@@ -19,7 +19,6 @@ class SignIn extends Component {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "", error: "" });
     } catch (error) {
-      console.log(error.code);
       if (error.code === "auth/user-not-found") {
         this.setState({ error: "User doesn't exist, please sign up!" });
       } else if (error.code === "auth/wrong-password")
