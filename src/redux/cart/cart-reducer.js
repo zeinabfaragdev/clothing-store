@@ -1,5 +1,9 @@
 import CartActionTypes from "./cart-types";
-import { addItemToCart } from "./cart-utils";
+import {
+  addItemToCart,
+  decreaseCartItem,
+  increaseCartItem,
+} from "./cart-utils";
 
 const INITIAL_STATE = {
   cartItems: [],
@@ -19,16 +23,17 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: cartItems,
       };
-    case CartActionTypes.REMOVE_CART_ITEM:
-      const cartItemToRemoveIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem.id === action.payload
-      );
-      let cartItemsAfterSplice = [...state.cartItems];
-      cartItemsAfterSplice.splice(cartItemToRemoveIndex, 1);
-
+    case CartActionTypes.CLEAR_CART_ITEM:
       return {
         ...state,
-        cartItems: cartItemsAfterSplice,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+      };
+
+    case CartActionTypes.DECREASE_CART_ITEM:
+      let decreasedCart = decreaseCartItem(state.cartItems, action.payload);
+      return {
+        ...state,
+        cartItems: decreasedCart,
       };
 
     default:

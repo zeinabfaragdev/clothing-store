@@ -13,9 +13,16 @@ export const addCartItem = (item) => {
   };
 };
 
-export const removeCartItem = (itemId) => {
+export const clearCartItem = (itemId) => {
   return {
-    type: CartActionTypes.REMOVE_CART_ITEM,
+    type: CartActionTypes.CLEAR_CART_ITEM,
     payload: itemId,
+  };
+};
+
+export const decreaseCartItem = (item) => {
+  return {
+    type: CartActionTypes.DECREASE_CART_ITEM,
+    payload: item,
   };
 };
