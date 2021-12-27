@@ -5,6 +5,7 @@ import { setCurrentUser } from "./redux/user/user-actions";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInPage from "./pages/sign-in/SignInPage";
+import CheckoutPage from "./pages/checkout/CheckoutPage";
 import Header from "./components/header/Header";
 import "./App.css";
 
@@ -43,6 +44,7 @@ function App() {
           path="/signin"
           element={currentUser ? <Navigate to="/" /> : <SignInPage />}
         />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </div>
   );

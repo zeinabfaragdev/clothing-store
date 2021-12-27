@@ -9,6 +9,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 const Header = () => {
   const currentUser = useSelector(({ user: { currentUser } }) => currentUser);
+
   const hidden = useSelector(({ cart: { hidden } }) => hidden);
 
   return (

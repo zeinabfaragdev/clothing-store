@@ -15,10 +15,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       };
     case CartActionTypes.ADD_CART_ITEM:
       let cartItems = addItemToCart(state.cartItems, action.payload);
-      console.log(cartItems);
       return {
         ...state,
         cartItems: cartItems,
+      };
+    case CartActionTypes.REMOVE_CART_ITEM:
+      const cartItemToRemoveIndex = state.cartItems.findIndex(
+        (cartItem) => cartItem.id === action.payload
+      );
+      let cartItemsAfterSplice = [...state.cartItems];
+      cartItemsAfterSplice.splice(cartItemToRemoveIndex, 1);
+
+      return {
+        ...state,
+        cartItems: cartItemsAfterSplice,
       };
 
     default:
