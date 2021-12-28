@@ -6,6 +6,7 @@ import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInPage from "./pages/sign-in/SignInPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
+import CollectionPage from "./pages/collection/CollectionPage";
 import Header from "./components/header/Header";
 import "./App.css";
 
@@ -39,6 +40,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/shop/:collection" element={<CollectionPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route
           path="/signin"
