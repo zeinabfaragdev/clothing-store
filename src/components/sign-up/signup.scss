@@ -11,3 +11,9 @@
   color: red;
   margin-top: 10px;
 }
+
+@media only screen and (max-width: 500px) {
+  .sign-up {
+    width: 100%;
+  }
+}

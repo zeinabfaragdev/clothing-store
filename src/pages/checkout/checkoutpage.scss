@@ -40,3 +40,21 @@
     width: 100%;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .header-block:nth-of-type(2) {
+    display: none;
+  }
+  .checkout-page {
+    .checkout-header {
+      .header-block {
+        width: 31%;
+
+        &:last-child {
+          width: 7%;
+          margin-right: 30px;
+        }
+      }
+    }
+  }
+}

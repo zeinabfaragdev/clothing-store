@@ -44,3 +44,17 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .image-container {
+    display: none;
+  }
+
+  .checkout-item {
+    .name,
+    .quantity,
+    .price {
+      width: 31%;
+    }
+  }
+}
