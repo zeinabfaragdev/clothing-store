@@ -19,3 +19,8 @@ export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   (collections) => Object.values(collections)
 );
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  (shop) => shop.isFetching
+);
