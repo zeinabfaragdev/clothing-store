@@ -45,4 +45,23 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const convertCollectionsSnapshot = (collections) => {
+  const transformedCollection = {};
+  const collectionsArray = collections.docs.map((doc) => {
+    const { title, items, routeName } = doc.data();
+    return {
+      routeName,
+      title,
+      items,
+      id: doc.id,
+    };
+  });
+
+  collectionsArray.forEach((collection) => {
+    transformedCollection[collection.routeName] = collection;
+  });
+
+  return transformedCollection;
+};
+
 export default firebase;

@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInPage from "./pages/sign-in/SignInPage";
 import CheckoutPage from "./pages/checkout/CheckoutPage";
-import CollectionPage from "./pages/collection/CollectionPage";
 import Header from "./components/header/Header";
 import "./App.css";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 function App() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +40,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/shop/:collection" element={<CollectionPage />} />
-        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/shop/*" element={<ShopPage />} />
         <Route
           path="/signin"
           element={currentUser ? <Navigate to="/" /> : <SignInPage />}

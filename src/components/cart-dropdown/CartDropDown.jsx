@@ -4,10 +4,11 @@ import CartItem from "../cart-item/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleCartHidden } from "../../redux/cart/cart-actions";
 import { useNavigate } from "react-router-dom";
+import { selectCartItems } from "../../redux/cart/cart-selectors";
 import "./cartdropdown.scss";
 
 const CartDropDown = () => {
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector(selectCartItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
