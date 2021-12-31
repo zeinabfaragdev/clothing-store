@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user-selectors";
-import { setCurrentUser } from "./redux/user/user-actions";
+import { setCurrentUserAsync } from "./redux/user/user-actions";
 import HomePage from "./pages/home/HomePage";
 import ShopPage from "./pages/shop/ShopPage";
 import SignInPage from "./pages/sign-in/SignInPage";
@@ -10,28 +10,12 @@ import CheckoutPage from "./pages/checkout/CheckoutPage";
 import Header from "./components/header/Header";
 import "./App.css";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
 function App() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Update the document title using the browser API
-    auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot((snapShot) => {
-          dispatch(
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
-          );
-        });
-      }
-      dispatch(setCurrentUser(userAuth));
-    });
+    dispatch(setCurrentUserAsync());
   }, [dispatch]);
 
   return (
